@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 class Player
   attr_accessor :money
   attr_reader :name, :deck, :deck_score
 
-  def initialize(name, role)
+  def initialize(name)
     @name = name
-    @role = role
     @deck = []
     @money = 100
     @deck_score = 0
@@ -15,21 +16,13 @@ class Player
     count_score(card)
   end
 
-  def dealer?
-    @role == 'dealer'
-  end
-
   def deck_size
     @deck.size
   end
 
-  def player?
-    @role == 'user'
-  end
-
   def print_deck(secure = false)
     if secure
-      @deck.map { |card| card = '*' }.join(' ')
+      @deck.map { |_card| '*' }.join(' ')
     else
       @deck.map(&:to_s).join(' ') << " - #{@deck_score}"
     end
@@ -46,15 +39,16 @@ class Player
 
   def reload_deck
     @deck = []
+    @deck_score = 0
   end
 
   private
 
   def count_score(card)
-    if card.name == 'A' && @deck_score >= 10
-      @deck_score += 1
-    else
-      @deck_score += card.value
-    end
+    @deck_score += if card.name == 'A' && @deck_score >= 10
+                     1
+                   else
+                     card.value
+                   end
   end
 end

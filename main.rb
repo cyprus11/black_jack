@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'lib/console_helper'
 require_relative 'lib/card'
 require_relative 'lib/deck'
@@ -8,15 +10,19 @@ require_relative 'lib/logic_for_dealer'
 ConsoleHelper.print_string('Добрый вечер! Введите ваше имя: ')
 user_name = ConsoleHelper.user_answer
 
-gamer = Player.new(user_name, 'user')
-dealer = Player.new('Дилер', 'dealer')
+gamer = Player.new(user_name)
+dealer = Player.new('Дилер')
 deck = Deck.new
 
 game = Game.new(gamer, dealer, deck)
-if game.start
+
+loop do
+  break unless game.start
+
   ConsoleHelper.print_string('Хотите повторить игру?(да/нет)')
-  game.restart_game if ConsoleHelper.user_answer.downcase == 'да'
-else
-  ConsoleHelper.print_string('Игра закончена, так как у вас или у диллера нет денег на ставку: ')
+  break if ConsoleHelper.user_answer.downcase == 'нет'
+
+  game.reload_decks
 end
-ConsoleHelper.game_info(game, gamer, dealer, false)
+
+ConsoleHelper.print_string('Игра закончена.')

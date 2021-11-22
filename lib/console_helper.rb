@@ -1,24 +1,16 @@
+# frozen_string_literal: true
+
 module ConsoleHelper
   class << self
     MENU = {
       '1': 'Пропустить',
       '2': 'Добавить карту',
       '3': 'Открыть карты'
-    }
-
-    MENU_ACTION = {
-      '1': proc { continue },
-      '2': proc { |player, deck| player.add_card_to_deck(deck.card) },
-      '3': proc { break }
-    }
+    }.freeze
 
     def print_string(str)
       puts str
-    end
-
-    def print_in_line(*attr)
-      puts
-      print attr.join(' ')
+      true
     end
 
     def user_answer

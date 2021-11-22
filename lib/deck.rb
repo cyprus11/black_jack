@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Deck
   SUITS = %w[♠ ♥ ♦ ♣].freeze
   CARDS_NAME_VALUE = {
@@ -14,13 +16,11 @@ class Deck
     'Q': 10,
     'K': 10,
     'A': 11
-  }
+  }.freeze
 
   def initialize
     @deck = []
     create_deck!
-
-    self
   end
 
   def card
