@@ -19,6 +19,12 @@ class Deck
   def initialize
     @deck = []
     create_deck!
+
+    self
+  end
+
+  def card
+    @deck.delete(@deck.sample)
   end
 
   private
@@ -29,5 +35,7 @@ class Deck
         @deck << Card.new(k, suit, v)
       end
     end
+
+    10.times { @deck.shuffle! }
   end
 end
