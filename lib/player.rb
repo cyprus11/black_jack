@@ -1,6 +1,6 @@
 class Player
   attr_accessor :money
-  attr_reader :name, :deck
+  attr_reader :name, :deck, :deck_score
 
   def initialize(name, role)
     @name = name
@@ -21,6 +21,19 @@ class Player
 
   def player?
     @role == 'user'
+  end
+
+  def print_deck(secure = false)
+    if secure
+      @deck.map { |card| card = '*' }.join(' ')
+    else
+      @deck.map(&:to_s).join(' ') << " - #{@deck_score}"
+    end
+  end
+
+  def money_to_bank
+    @money -= 10
+    10
   end
 
   private

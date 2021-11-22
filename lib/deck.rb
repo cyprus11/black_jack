@@ -1,5 +1,5 @@
 class Deck
-  SUITS = %w[♡ ♤ ♢ ♧].freeze
+  SUITS = %w[♠ ♥ ♦ ♣].freeze
   CARDS_NAME_VALUE = {
     '2': 2,
     '3': 3,
