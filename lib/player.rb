@@ -19,6 +19,10 @@ class Player
     @role == 'dealer'
   end
 
+  def deck_size
+    @deck.size
+  end
+
   def player?
     @role == 'user'
   end
@@ -34,6 +38,14 @@ class Player
   def money_to_bank
     @money -= 10
     10
+  end
+
+  def to_s
+    "имя: #{name}, баланс: #{money}"
+  end
+
+  def reload_deck
+    @deck = []
   end
 
   private

@@ -27,6 +27,11 @@ class Deck
     @deck.delete(@deck.sample)
   end
 
+  def reload_deck
+    @deck = []
+    create_deck!
+  end
+
   private
 
   def create_deck!
